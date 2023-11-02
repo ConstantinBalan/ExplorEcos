@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:api_client/models/plant.dart';
 import 'package:http/http.dart' as http;
 
 class ApiClientError implements Exception {
@@ -33,7 +33,7 @@ class ApiClient {
   /// fulltext search string.
   ///
   /// GET /cards/search
-  Future<SearchCards> getCardFullText() async {
+  Future<Plant> getPlants() async {
     final queryParameters = {
       'identified': true,
       'verifiable': true,
@@ -43,7 +43,7 @@ class ApiClient {
       'quality_grade': 'research',
     };
     final request = _baseUrl.replace(
-      path: '/cards/search',
+      path: '/observations',
       queryParameters: queryParameters,
     );
 
@@ -62,4 +62,5 @@ class ApiClient {
       throw ApiClientError(error: error, stackTrace: stackTrace);
     }
   }
+  
 }
