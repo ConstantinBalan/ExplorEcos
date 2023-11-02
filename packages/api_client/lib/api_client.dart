@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:api_client/models/plant.dart';
+import 'package:api_client/models/observation_results.dart';
 import 'package:http/http.dart' as http;
 
 class ApiClientError implements Exception {
@@ -33,7 +33,7 @@ class ApiClient {
   /// fulltext search string.
   ///
   /// GET /cards/search
-  Future<Plant> getPlants() async {
+  Future<ObservationResults> getPlants() async {
     final queryParameters = {
       'identified': true,
       'verifiable': true,
@@ -57,7 +57,7 @@ class ApiClient {
         );
       }
       final json = jsonDecode(response.body);
-      return SearchCards.fromJson(json as Map<String, dynamic>);
+      return ObservationResults.fromJson(json as Map<String, dynamic>);
     } catch (error, stackTrace) {
       throw ApiClientError(error: error, stackTrace: stackTrace);
     }
