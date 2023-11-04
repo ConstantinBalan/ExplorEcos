@@ -57,6 +57,7 @@ class ApiClient {
         );
       }
       final json = jsonDecode(response.body);
+      //return json.map((item) => Classification.fromJson(item as Map<String,dynamic>)).toList();
       return ObservationResults.fromJson(json as Map<String, dynamic>);
     } catch (error, stackTrace) {
       throw ApiClientError(error: error, stackTrace: stackTrace);
