@@ -5,9 +5,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'observation_results.g.dart';
 
 @JsonSerializable()
-
 class ObservationResults extends Equatable {
-  const ObservationResults ({required this.totalResults, required this.page, required this.perPage, required this.results,});
+  const ObservationResults ({required this.totalResults, required this.page, required this.perPage, required this.results});
   final int totalResults;
   final int page;
   final int perPage;
@@ -21,5 +20,5 @@ class ObservationResults extends Equatable {
   Map<String, dynamic> toJson() => _$ObservationResultsToJson(this);
 
   @override
-  List<Object?> get props => [totalResults, page, perPage, results,];
+  List<Object?> get props => [totalResults, page, perPage, results];
 }

@@ -1,4 +1,4 @@
-import 'package:api_client/models/photo.dart';
+import 'package:api_client/models/taxon.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -6,12 +6,11 @@ part 'result.g.dart';
 
 @JsonSerializable()
 class Result extends Equatable {
-  const Result({required this.id, required this.cachedVotesTotal, required this.captive, required this.photos, required this.qualityGrade,});
-  final int id;
-  final int cachedVotesTotal;
-  final bool captive;
-  final List<Photo> photos;
+  const Result({required this.qualityGrade, required this.speciesGuess, required this.taxon, required this.communityTaxonId});
   final String qualityGrade;
+  final String speciesGuess;
+  final Taxon taxon;
+  final int communityTaxonId;
 
    /// Connect the generated [$ResultFromJson] function to the fromJson
   /// factory.
@@ -22,5 +21,5 @@ class Result extends Equatable {
 
 
   @override
-  List<Object?> get props => [id, cachedVotesTotal, captive, photos, qualityGrade];
+  List<Object?> get props => [qualityGrade, speciesGuess, taxon, communityTaxonId];
 }

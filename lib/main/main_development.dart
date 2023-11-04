@@ -9,10 +9,10 @@ void main() async {
         baseUrl: 'https://api.inaturalist.org/v1/',
       );
 
-      final iNaturalist_Repository = iNaturalist_Repository(apiClient: apiClient);
+      final inaturalistRepository = iNaturalistRepository(apiClient: apiClient);
       return App(
         apiClient: apiClient,
-        iNaturalist_Repository: iNaturalist_Repository,
+        iNaturalistRepository: inaturalistRepository,
       );
     });
 }
