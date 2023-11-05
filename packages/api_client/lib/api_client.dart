@@ -33,14 +33,22 @@ class ApiClient {
   /// fulltext search string.
   ///
   /// GET /cards/search
-  Future<ObservationResults> getPlants() async {
+  /// 
+  /// From line 38 to 74 is a request call to the API. If we want to make another call, we can copy/paste
+  /// the block of code below and just adjust the name and parameters
+  Future<ObservationResults> getPlants(double latitude, double longitude, double radius) async {
     final queryParameters = {
       'identified': true,
+      'photos': true,
       'verifiable': true,
+      'rank': 'species',
+      'iconic_taxa': 'Animalia%2CAmphibia%2CArachnida%2CAves%2CInsecta%2CMammalia%2CMollusca%2CReptilia',
       'lat': '42.415984239686196',
       'lng': '-83.94656846383864',
       'radius': '13.64266508482466',
       'quality_grade': 'research',
+      'order': 'desc',
+      'order_by': 'created_at'
     };
     final request = _baseUrl.replace(
       path: '/observations',
