@@ -43,9 +43,9 @@ class ApiClient {
       'verifiable': true,
       'rank': 'species',
       'iconic_taxa': 'Animalia%2CAmphibia%2CArachnida%2CAves%2CInsecta%2CMammalia%2CMollusca%2CReptilia',
-      'lat': '42.415984239686196',
-      'lng': '-83.94656846383864',
-      'radius': '13.64266508482466',
+      'lat': latitude,
+      'lng': longitude,
+      'radius': radius,
       'quality_grade': 'research',
       'order': 'desc',
       'order_by': 'created_at'
