@@ -17,3 +17,11 @@ final class PlantsLoadSuccess extends PlantsState {
 }
 
 final class PlantsLoadFailure extends PlantsState {}
+
+final class UserLocationLoadSuccess extends PlantsState{
+  const UserLocationLoadSuccess(this.location);
+
+  final Position location;
+}
+
+final class UserLocationLoadFailure extends PlantsState{}

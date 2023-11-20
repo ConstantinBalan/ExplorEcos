@@ -14,3 +14,9 @@ class PlantsRequested extends PlantsEvent {
   final double long;
   final double radius;
 }
+
+class LocationRequested extends PlantsEvent {
+  const LocationRequested(this.location);
+
+  final Position location;
+}
