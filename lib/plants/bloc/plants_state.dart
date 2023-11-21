@@ -7,7 +7,13 @@ sealed class PlantsState extends Equatable {
   List<Object> get props => [];
 }
 
-final class PlantsInitial extends PlantsState {}
+final class PlantsInitial extends PlantsState {
+  const PlantsInitial();
+}
+
+final class PlantsLoading extends PlantsState {
+  const PlantsLoading();
+}
 
 final class PlantsLoadSuccess extends PlantsState {
   //Call here the successful build UI class or element or whatever they're called
