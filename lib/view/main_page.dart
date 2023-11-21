@@ -41,13 +41,13 @@ class _MainPageViewState extends State<MainPageView> {
             builder: (context) => ResultPage(plantList: state.plantList),
           ),
         );
-        // Meaghan's stuff goes here
       }
 
       // do stuff here based on BlocA's state
     }, builder: (BuildContext context, PlantsState state) {
       if (state is PlantsInitial) {
         return Container(
+            // Meaghan's stuff goes here
             child: ElevatedButton(
                 onPressed: () async {
                   await Geolocator.requestPermission();
