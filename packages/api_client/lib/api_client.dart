@@ -33,19 +33,58 @@ class ApiClient {
   /// fulltext search string.
   ///
   /// GET /cards/search
-  /// 
+  ///
   /// From line 38 to 74 is a request call to the API. If we want to make another call, we can copy/paste
   /// the block of code below and just adjust the name and parameters
-  Future<ObservationResults> getPlants(double latitude, double longitude, double radius) async {
+  Future<ObservationResults> getPlants(
+      double latitude, double longitude, double radius) async {
+    final queryParameters = {
+      'identified': true.toString(),
+      'photos': true.toString(),
+      'verifiable': true.toString(),
+      'rank': ['species'],
+      //'iconic_taxa': ['Chromista%2CFungi%2CPlantae'],
+      'lat': latitude.toString(),
+      'lng': longitude.toString(),
+      'radius': radius.toString(),
+      'quality_grade': 'research',
+      'order': 'desc',
+      'order_by': 'created_at'
+    };
+    final request = _baseUrl.replace(
+      path: '/v1/observations',
+      queryParameters: queryParameters,
+    );
+
+    try {
+      final response = await _httpClient.get(request);
+
+      if (response.statusCode != 200) {
+        throw ApiClientError(
+          error: '${response.statusCode}',
+          stackTrace: StackTrace.current,
+        );
+      }
+      final json = jsonDecode(response.body);
+      //return json.map((item) => Classification.fromJson(item as Map<String,dynamic>)).toList();
+      return ObservationResults.fromJson(json as Map<String, dynamic>);
+    } catch (error, stackTrace) {
+      throw ApiClientError(error: error, stackTrace: stackTrace);
+    }
+  }
+
+  Future<ObservationResults> getAnimals(
+      double latitude, double longitude, double radius) async {
     final queryParameters = {
       'identified': true,
       'photos': true,
       'verifiable': true,
       'rank': 'species',
-      'iconic_taxa': 'Animalia%2CAmphibia%2CArachnida%2CAves%2CInsecta%2CMammalia%2CMollusca%2CReptilia',
-      'lat': '42.415984239686196',
-      'lng': '-83.94656846383864',
-      'radius': '13.64266508482466',
+      'iconic_taxa':
+          'Animalia%2CAmphibia%2CArachnida%2CAves%2CInsecta%2CMammalia%2CMollusca%2CReptilia',
+      'lat': latitude,
+      'lng': longitude,
+      'radius': radius,
       'quality_grade': 'research',
       'order': 'desc',
       'order_by': 'created_at'
@@ -71,5 +110,4 @@ class ApiClient {
       throw ApiClientError(error: error, stackTrace: stackTrace);
     }
   }
-  
 }

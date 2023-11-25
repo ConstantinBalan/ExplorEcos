@@ -14,7 +14,6 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
       : _inaturalistRepository = inaturalistRepository,
         super(const PlantsInitial()) {
     on<PlantsRequested>(_plantListRequested);
-    on<PlantsRequested>(_locationRequestedPermission);
   }
 
   final iNaturalistRepository _inaturalistRepository;
@@ -24,24 +23,14 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
   ) async {
     emit(const PlantsLoading());
     try {
-      final userLocation = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
       final plantList = await _inaturalistRepository.getPlants(
-        latitude: userLocation.latitude,
-        longitude: userLocation.longitude,
-        radius: 25,
+        latitude: event.latitude,
+        longitude: event.longitude,
+        radius: 50,
       );
       emit(PlantsLoadSuccess(plantList));
     } catch (e) {
       emit(PlantsLoadFailure());
     }
-  }
-
-  Future<void> _locationRequestedPermission(
-    PlantsRequested event,
-    Emitter<PlantsState> emit,
-  ) async {
-    LocationPermission permission = await Geolocator.requestPermission();
   }
 }

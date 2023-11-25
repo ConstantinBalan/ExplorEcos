@@ -9,18 +9,18 @@ part of 'taxon.dart';
 Taxon _$TaxonFromJson(Map<String, dynamic> json) => Taxon(
       name: json['name'] as String,
       defaultPhoto:
-          DefaultPhoto.fromJson(json['defaultPhoto'] as Map<String, dynamic>),
-      atlasId: json['atlasId'] as int,
-      wikipediaUrl: json['wikipediaUrl'] as String,
-      iconicTaxonName: json['iconicTaxonName'] as String,
-      preferredCommonName: json['preferredCommonName'] as String,
+          DefaultPhoto.fromJson(json['default_photo'] as Map<String, dynamic>),
+      atlasId: json['atlas_id'] as int?,
+      wikipediaUrl: json['wikipedia_url'] as String?,
+      iconicTaxonName: json['iconic_taxon_name'] as String,
+      preferredCommonName: json['preferred_common_name'] as String,
     );
 
 Map<String, dynamic> _$TaxonToJson(Taxon instance) => <String, dynamic>{
       'name': instance.name,
-      'defaultPhoto': instance.defaultPhoto,
-      'atlasId': instance.atlasId,
-      'wikipediaUrl': instance.wikipediaUrl,
-      'iconicTaxonName': instance.iconicTaxonName,
-      'preferredCommonName': instance.preferredCommonName,
+      'default_photo': instance.defaultPhoto,
+      'atlas_id': instance.atlasId,
+      'wikipedia_url': instance.wikipediaUrl,
+      'iconic_taxon_name': instance.iconicTaxonName,
+      'preferred_common_name': instance.preferredCommonName,
     };

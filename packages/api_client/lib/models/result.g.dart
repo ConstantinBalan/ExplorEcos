@@ -7,15 +7,15 @@ part of 'result.dart';
 // **************************************************************************
 
 Result _$ResultFromJson(Map<String, dynamic> json) => Result(
-      qualityGrade: json['qualityGrade'] as String,
-      speciesGuess: json['speciesGuess'] as String,
+      qualityGrade: json['quality_grade'] as String,
+      speciesGuess: json['species_guess'] as String,
       taxon: Taxon.fromJson(json['taxon'] as Map<String, dynamic>),
-      communityTaxonId: json['communityTaxonId'] as int,
+      communityTaxonId: json['community_taxon_id'] as int,
     );
 
 Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
-      'qualityGrade': instance.qualityGrade,
-      'speciesGuess': instance.speciesGuess,
+      'quality_grade': instance.qualityGrade,
+      'species_guess': instance.speciesGuess,
       'taxon': instance.taxon,
-      'communityTaxonId': instance.communityTaxonId,
+      'community_taxon_id': instance.communityTaxonId,
     };

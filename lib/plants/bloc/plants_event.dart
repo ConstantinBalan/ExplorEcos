@@ -8,11 +8,15 @@ sealed class PlantsEvent extends Equatable {
 }
 
 class PlantsRequested extends PlantsEvent {
-  const PlantsRequested();
+  const PlantsRequested(this.latitude, this.longitude);
+
+  final double latitude;
+  final double longitude;
 }
 
-class LocationRequested extends PlantsEvent {
-  const LocationRequested(this.location);
+class AnimalsRequested extends PlantsEvent {
+  const AnimalsRequested(this.latitude, this.longitude);
 
-  final Position location;
+  final double latitude;
+  final double longitude;
 }

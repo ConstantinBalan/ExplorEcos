@@ -8,13 +8,13 @@ part of 'default_photo.dart';
 
 DefaultPhoto _$DefaultPhotoFromJson(Map<String, dynamic> json) => DefaultPhoto(
       url: json['url'] as String,
-      squareUrl: json['squareUrl'] as String,
-      mediumUrl: json['mediumUrl'] as String,
+      squareUrl: json['square_url'] as String,
+      mediumUrl: json['medium_url'] as String,
     );
 
 Map<String, dynamic> _$DefaultPhotoToJson(DefaultPhoto instance) =>
     <String, dynamic>{
       'url': instance.url,
-      'squareUrl': instance.squareUrl,
-      'mediumUrl': instance.mediumUrl,
+      'square_url': instance.squareUrl,
+      'medium_url': instance.mediumUrl,
     };

@@ -8,9 +8,9 @@ part of 'observation_results.dart';
 
 ObservationResults _$ObservationResultsFromJson(Map<String, dynamic> json) =>
     ObservationResults(
-      totalResults: json['totalResults'] as int,
+      totalResults: json['total_results'] as int,
       page: json['page'] as int,
-      perPage: json['perPage'] as int,
+      perPage: json['per_page'] as int,
       results: (json['results'] as List<dynamic>)
           .map((e) => Result.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -18,8 +18,8 @@ ObservationResults _$ObservationResultsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$ObservationResultsToJson(ObservationResults instance) =>
     <String, dynamic>{
-      'totalResults': instance.totalResults,
+      'total_results': instance.totalResults,
       'page': instance.page,
-      'perPage': instance.perPage,
+      'per_page': instance.perPage,
       'results': instance.results,
     };

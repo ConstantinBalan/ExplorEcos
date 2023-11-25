@@ -6,15 +6,22 @@ part 'observation_results.g.dart';
 
 @JsonSerializable()
 class ObservationResults extends Equatable {
-  const ObservationResults ({required this.totalResults, required this.page, required this.perPage, required this.results});
+  const ObservationResults(
+      {required this.totalResults,
+      required this.page,
+      required this.perPage,
+      required this.results});
+  @JsonKey(name: 'total_results')
   final int totalResults;
   final int page;
+  @JsonKey(name: 'per_page')
   final int perPage;
   final List<Result> results;
 
   /// Connect the generated [$ObservationResultsFromJson] function to the fromJson
   /// factory.
-  factory ObservationResults.fromJson(Map<String, dynamic> json) => _$ObservationResultsFromJson(json);
+  factory ObservationResults.fromJson(Map<String, dynamic> json) =>
+      _$ObservationResultsFromJson(json);
 
   /// Connect the generated [$ObservationResultsToJson] function to the toJson method.
   Map<String, dynamic> toJson() => _$ObservationResultsToJson(this);
