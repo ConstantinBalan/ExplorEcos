@@ -11,6 +11,7 @@ final class PlantsInitial extends PlantsState {
   const PlantsInitial();
 }
 
+//Plants stuff below
 final class PlantsLoading extends PlantsState {
   const PlantsLoading();
 }
@@ -24,10 +25,15 @@ final class PlantsLoadSuccess extends PlantsState {
 
 final class PlantsLoadFailure extends PlantsState {}
 
-final class UserLocationLoadSuccess extends PlantsState{
-  const UserLocationLoadSuccess(this.location);
-
-  final Position location;
+//Animals stuff below
+final class AnimalsLoading extends PlantsState {
+  const AnimalsLoading();
 }
 
-final class UserLocationLoadFailure extends PlantsState{}
+final class AnimalsLoadSuccess extends PlantsState {
+  const AnimalsLoadSuccess(this.animalList);
+
+  final ObservationResults animalList;
+}
+
+final class AnimalsLoadFailure extends PlantsState {}

@@ -14,6 +14,7 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
       : _inaturalistRepository = inaturalistRepository,
         super(const PlantsInitial()) {
     on<PlantsRequested>(_plantListRequested);
+    on<AnimalsRequested>(_animalListRequested);
   }
 
   final iNaturalistRepository _inaturalistRepository;
@@ -31,6 +32,23 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
       emit(PlantsLoadSuccess(plantList));
     } catch (e) {
       emit(PlantsLoadFailure());
+    }
+  }
+
+  Future<void> _animalListRequested(
+    AnimalsRequested event,
+    Emitter<PlantsState> emit,
+  ) async {
+    emit(const AnimalsLoading());
+    try {
+      final animalList = await _inaturalistRepository.getAnimals(
+        latitude: event.latitude,
+        longitude: event.longitude,
+        radius: 50,
+      );
+      emit(AnimalsLoadSuccess(animalList));
+    } catch (e) {
+      emit(AnimalsLoadFailure());
     }
   }
 }

@@ -16,5 +16,12 @@ class iNaturalistRepository {
     return await _apiClient.getPlants(latitude, longitude, radius);
   }
 
+  Future<ObservationResults> getAnimals(
+      {required double latitude,
+      required double longitude,
+      required double radius}) async {
+    return await _apiClient.getAnimals(latitude, longitude, radius);
+  }
+
   // Future<AutoComplete>
 }

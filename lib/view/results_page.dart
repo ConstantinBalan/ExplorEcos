@@ -5,8 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inaturalist_repository/inaturalist_repository.dart';
 
 class ResultPage extends StatelessWidget {
-  const ResultPage({required this.plantList, super.key});
-  final ObservationResults plantList;
+  const ResultPage({this.plantList, this.animalList, super.key});
+  final ObservationResults? plantList;
+  final ObservationResults? animalList;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ResultPage extends StatelessWidget {
         //to pull in the data
 
         //Use ListViewBuilder here, Chris
-        child: Text(plantList.toString()),
+        child: Text(animalList.toString()),
       ),
     );
   }

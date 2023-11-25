@@ -45,7 +45,14 @@ class _MainPageViewState extends State<MainPageView> {
             ),
           );
         }
-
+        if (state is AnimalsLoadSuccess) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ResultPage(animalList: state.animalList),
+            ),
+          );
+        }
         // do stuff here based on BlocA's state
       }, builder: (BuildContext context, PlantsState state) {
         if (state is PlantsInitial) {
@@ -118,7 +125,7 @@ class _MainPageViewState extends State<MainPageView> {
                         onPressed: () {
                           context
                               .read<PlantsBloc>()
-                              .add(PlantsRequested(latitude, longitude));
+                              .add(AnimalsRequested(latitude, longitude));
                           //placeholder
                         },
                         child: const Text('Animals'),
@@ -135,7 +142,13 @@ class _MainPageViewState extends State<MainPageView> {
 
         if (state is PlantsLoadFailure) {
           return Center(
-            child: Text("oops!!@"),
+            child: Text("Could not load plant list"),
+          );
+        }
+
+        if (state is AnimalsLoadFailure) {
+          return Center(
+            child: Text("Could not load animal list"),
           );
         }
 
