@@ -1,20 +1,20 @@
-part of 'plants_bloc.dart';
+part of 'nature_bloc.dart';
 
-sealed class PlantsEvent extends Equatable {
-  const PlantsEvent();
+sealed class NatureEvent extends Equatable {
+  const NatureEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class PlantsRequested extends PlantsEvent {
+class PlantsRequested extends NatureEvent {
   const PlantsRequested(this.latitude, this.longitude);
 
   final double latitude;
   final double longitude;
 }
 
-class AnimalsRequested extends PlantsEvent {
+class AnimalsRequested extends NatureEvent {
   const AnimalsRequested(this.latitude, this.longitude);
 
   final double latitude;

@@ -3,16 +3,15 @@
 import 'package:api_client/models/observation_results.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:inaturalist_repository/inaturalist_repository.dart';
 
-part 'plants_event.dart';
-part 'plants_state.dart';
+part 'nature_event.dart';
+part 'nature_state.dart';
 
-class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
-  PlantsBloc({required iNaturalistRepository inaturalistRepository})
+class NatureBloc extends Bloc<NatureEvent, NatureState> {
+  NatureBloc({required iNaturalistRepository inaturalistRepository})
       : _inaturalistRepository = inaturalistRepository,
-        super(const PlantsInitial()) {
+        super(const NatureInitial()) {
     on<PlantsRequested>(_plantListRequested);
     on<AnimalsRequested>(_animalListRequested);
   }
@@ -20,35 +19,35 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
   final iNaturalistRepository _inaturalistRepository;
   Future<void> _plantListRequested(
     PlantsRequested event,
-    Emitter<PlantsState> emit,
+    Emitter<NatureState> emit,
   ) async {
-    emit(const PlantsLoading());
+    emit(const NatureLoading());
     try {
-      final plantList = await _inaturalistRepository.getPlants(
+      final natureList = await _inaturalistRepository.getPlants(
         latitude: event.latitude,
         longitude: event.longitude,
         radius: 50,
       );
-      emit(PlantsLoadSuccess(plantList));
+      emit(NatureLoadSuccess(natureList));
     } catch (e) {
-      emit(PlantsLoadFailure());
+      emit(NatureLoadFailure());
     }
   }
 
   Future<void> _animalListRequested(
     AnimalsRequested event,
-    Emitter<PlantsState> emit,
+    Emitter<NatureState> emit,
   ) async {
-    emit(const AnimalsLoading());
+    emit(const NatureLoading());
     try {
-      final animalList = await _inaturalistRepository.getAnimals(
+      final natureList = await _inaturalistRepository.getAnimals(
         latitude: event.latitude,
         longitude: event.longitude,
         radius: 50,
       );
-      emit(AnimalsLoadSuccess(animalList));
+      emit(NatureLoadSuccess(natureList));
     } catch (e) {
-      emit(AnimalsLoadFailure());
+      emit(NatureLoadFailure());
     }
   }
 }

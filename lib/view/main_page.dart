@@ -1,6 +1,6 @@
 // ignore_for_file: inference_failure_on_instance_creation, lines_longer_than_80_chars, use_build_context_synchronously
 
-import 'package:explorecos/plants/bloc/plants_bloc.dart';
+import 'package:explorecos/plants/bloc/nature_bloc.dart';
 import 'package:explorecos/view/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +12,8 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<PlantsBloc>(
-      create: (_) => PlantsBloc(
+    return BlocProvider<NatureBloc>(
+      create: (_) => NatureBloc(
         inaturalistRepository: context.read<iNaturalistRepository>(),
       ),
       child: const MainPageView(),
@@ -35,27 +35,17 @@ class _MainPageViewState extends State<MainPageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<PlantsBloc, PlantsState>(listener: (context, state) {
-        if (state is PlantsLoadSuccess) {
-          //The material page stuff is how to push stuff to another page
+      body: BlocConsumer<NatureBloc, NatureState>(listener: (context, state) {
+        if (state is NatureLoadSuccess) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ResultPage(plantList: state.plantList),
+              builder: (context) => ResultPage(natureList: state.natureList),
             ),
           );
         }
-        if (state is AnimalsLoadSuccess) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ResultPage(animalList: state.animalList),
-            ),
-          );
-        }
-        // do stuff here based on BlocA's state
-      }, builder: (BuildContext context, PlantsState state) {
-        if (state is PlantsInitial) {
+      }, builder: (BuildContext context, NatureState state) {
+        if (state is NatureInitial) {
           if (hasPermission == LocationPermission.denied) {}
           return FutureBuilder(
             future: setPermissions(),
@@ -103,7 +93,7 @@ class _MainPageViewState extends State<MainPageView> {
                         ),
                         onPressed: () {
                           context
-                              .read<PlantsBloc>()
+                              .read<NatureBloc>()
                               .add(PlantsRequested(latitude, longitude));
                         },
                         child: const Text('Plants'),
@@ -124,7 +114,7 @@ class _MainPageViewState extends State<MainPageView> {
                         ),
                         onPressed: () {
                           context
-                              .read<PlantsBloc>()
+                              .read<NatureBloc>()
                               .add(AnimalsRequested(latitude, longitude));
                           //placeholder
                         },
@@ -140,19 +130,12 @@ class _MainPageViewState extends State<MainPageView> {
           );
         }
 
-        if (state is PlantsLoadFailure) {
+        if (state is NatureLoadFailure) {
           return Center(
             child: Text("Could not load plant list"),
           );
         }
 
-        if (state is AnimalsLoadFailure) {
-          return Center(
-            child: Text("Could not load animal list"),
-          );
-        }
-
-        //This doesn't have to be here, but I just put a return so it'd stop erroring out
         return Center(
           child: CircularProgressIndicator(),
         );
