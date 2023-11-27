@@ -13,7 +13,7 @@ class Taxon extends Equatable {
       required this.wikipediaUrl,
       required this.iconicTaxonName,
       required this.preferredCommonName});
-  final String name;
+  final String? name;
   @JsonKey(name: 'default_photo')
   final DefaultPhoto defaultPhoto;
   @JsonKey(name: 'atlas_id')
