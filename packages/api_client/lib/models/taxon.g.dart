@@ -13,7 +13,7 @@ Taxon _$TaxonFromJson(Map<String, dynamic> json) => Taxon(
       atlasId: json['atlas_id'] as int?,
       wikipediaUrl: json['wikipedia_url'] as String?,
       iconicTaxonName: json['iconic_taxon_name'] as String,
-      preferredCommonName: json['preferred_common_name'] as String, 
+      preferredCommonName: json['preferred_common_name'] as String,
     );
 
 Map<String, dynamic> _$TaxonToJson(Taxon instance) => <String, dynamic>{

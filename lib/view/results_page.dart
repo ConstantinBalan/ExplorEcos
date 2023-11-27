@@ -8,9 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ResultPage extends StatelessWidget {
-  const ResultPage({this.plantList, this.animalList, super.key, required ObservationResults this.natureList});
-  final ObservationResults? plantList;
-  final ObservationResults? animalList;
+  const ResultPage({super.key, required ObservationResults this.natureList});
   final ObservationResults? natureList;
 
   @override
