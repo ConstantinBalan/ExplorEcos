@@ -45,7 +45,17 @@ class _MainPageViewState extends State<MainPageView> {
           );
         }
       }, builder: (BuildContext context, NatureState state) {
-        if (state is NatureInitial) {
+        if (state is NatureLoadFailure) {
+          return Center(
+            child: Text("Could not load plant list"),
+          );
+        }
+        else if (state is NatureLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        else {
           if (hasPermission == LocationPermission.denied) {}
           return FutureBuilder(
             future: setPermissions(),
@@ -129,16 +139,6 @@ class _MainPageViewState extends State<MainPageView> {
             },
           );
         }
-
-        if (state is NatureLoadFailure) {
-          return Center(
-            child: Text("Could not load plant list"),
-          );
-        }
-
-        return Center(
-          child: CircularProgressIndicator(),
-        );
       }),
     );
   }
