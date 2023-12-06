@@ -23,7 +23,7 @@ class Taxon extends Equatable {
   @JsonKey(name: 'iconic_taxon_name')
   final String iconicTaxonName;
   @JsonKey(name: 'preferred_common_name')
-  final String preferredCommonName;
+  final String? preferredCommonName;
 
   /// Connect the generated [$TaxonFromJson] function to the fromJson
   /// factory.
