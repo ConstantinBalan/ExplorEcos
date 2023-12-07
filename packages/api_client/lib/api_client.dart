@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:api_client/models/observation_results.dart';
+import 'package:api_client/models/result.dart';
 import 'package:http/http.dart' as http;
 
 class ApiClientError implements Exception {
@@ -47,6 +48,7 @@ class ApiClient {
       'lat': latitude.toString(),
       'lng': longitude.toString(),
       'radius': radius.toString(),
+      'per_page': 200.toString(),
       'quality_grade': 'research',
       'order': 'desc',
       'order_by': 'created_at'
@@ -93,6 +95,7 @@ class ApiClient {
       'lng': longitude.toString(),
       'radius': radius.toString(),
       'quality_grade': 'research',
+      'per_page': 200.toString(),
       'order': 'desc',
       'order_by': 'created_at'
     };
@@ -114,6 +117,32 @@ class ApiClient {
       return ObservationResults.fromJson(json as Map<String, dynamic>);
     } catch (error, stackTrace) {
       throw ApiClientError(error: error, stackTrace: stackTrace);
+    }
+  }
+
+  Future<String> getWikiInfo(Result result) async {
+    try {
+      final lastSlashIndex = result.taxon.wikipediaUrl!.lastIndexOf('/') + 1;
+      final trimmedURL = result.taxon.wikipediaUrl!.substring(lastSlashIndex);
+      final finalString =
+          'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=$trimmedURL&exintro&explaintext';
+      //final response = await http.get(Uri.parse(finalString));
+      final uri = Uri.https('https://en.wikipedia.org',
+          '/w/api.php?action=query&format=json&prop=extracts&titles=$trimmedURL&exintro&explaintext');
+      var response = await http.get(uri);
+      if (response.statusCode != 200) {
+        throw ApiClientError(
+          error: '${response.statusCode}',
+          stackTrace: StackTrace.current,
+        );
+      }
+
+      final Map<String, dynamic> data = Map<String, dynamic>.from(
+          jsonDecode(response.body) as Map<String, dynamic>);
+      final page = data['query']['pages'].values.first;
+      return page['extract'].toString();
+    } catch (e, stackTrace) {
+      throw ApiClientError(error: e, stackTrace: stackTrace);
     }
   }
 }

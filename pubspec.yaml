@@ -36,4 +36,5 @@ flutter:
   generate: true
   assets:
     - assets/background.jpg
+    - assets/image_not_available.png
 

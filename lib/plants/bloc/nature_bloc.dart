@@ -26,11 +26,11 @@ class NatureBloc extends Bloc<NatureEvent, NatureState> {
       final natureList = await _inaturalistRepository.getPlants(
         latitude: event.latitude,
         longitude: event.longitude,
-        radius: 50,
+        radius: 100,
       );
       emit(NatureLoadSuccess(natureList));
     } catch (e) {
-      emit(NatureLoadFailure());
+      emit(const NatureLoadFailure());
     }
   }
 
@@ -43,11 +43,11 @@ class NatureBloc extends Bloc<NatureEvent, NatureState> {
       final natureList = await _inaturalistRepository.getAnimals(
         latitude: event.latitude,
         longitude: event.longitude,
-        radius: 50,
+        radius: 100,
       );
       emit(NatureLoadSuccess(natureList));
     } catch (e) {
-      emit(NatureLoadFailure());
+      emit(const NatureLoadFailure());
     }
   }
 }

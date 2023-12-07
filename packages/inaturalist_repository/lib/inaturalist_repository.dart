@@ -1,5 +1,6 @@
 import 'package:api_client/api_client.dart';
 import 'package:api_client/models/observation_results.dart';
+import 'package:api_client/models/result.dart';
 
 // ignore: camel_case_types
 class iNaturalistRepository {
@@ -23,5 +24,7 @@ class iNaturalistRepository {
     return await _apiClient.getAnimals(latitude, longitude, radius);
   }
 
-  // Future<AutoComplete>
+  Future<String> getWiki({required Result result}) async {
+    return await _apiClient.getWikiInfo(result);
+  }
 }

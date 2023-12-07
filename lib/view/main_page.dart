@@ -46,16 +46,14 @@ class _MainPageViewState extends State<MainPageView> {
         }
       }, builder: (BuildContext context, NatureState state) {
         if (state is NatureLoadFailure) {
-          return Center(
-            child: Text("Could not load plant list"),
+          return const Center(
+            child: Text('Could not load nature list'),
           );
-        }
-        else if (state is NatureLoading) {
-          return Center(
+        } else if (state is NatureLoading) {
+          return const Center(
             child: CircularProgressIndicator(),
           );
-        }
-        else {
+        } else {
           if (hasPermission == LocationPermission.denied) {}
           return FutureBuilder(
             future: setPermissions(),
