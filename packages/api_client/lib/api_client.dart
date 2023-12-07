@@ -126,10 +126,7 @@ class ApiClient {
       final trimmedURL = result.taxon.wikipediaUrl!.substring(lastSlashIndex);
       final finalString =
           'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=$trimmedURL&exintro&explaintext';
-      //final response = await http.get(Uri.parse(finalString));
-      final uri = Uri.https('https://en.wikipedia.org',
-          '/w/api.php?action=query&format=json&prop=extracts&titles=$trimmedURL&exintro&explaintext');
-      var response = await http.get(uri);
+      final response = await http.get(Uri.parse(finalString));
       if (response.statusCode != 200) {
         throw ApiClientError(
           error: '${response.statusCode}',

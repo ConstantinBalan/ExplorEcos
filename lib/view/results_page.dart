@@ -132,67 +132,20 @@ class _ResultPageViewState extends State<ResultPageView> {
                             ),
                           ),
                         ),
-                        if (filteredResults[index].taxon.wikipediaUrl != null)
-                          BlocBuilder<WikiBloc, WikiState>(
-                              builder: (context, state) {
-                            if (state is WikiLoading) {
-                              return const CircularProgressIndicator();
-                            }
-                            if (state is WikiLoadFailure) {
-                              return const Text('Data could not be retrieved.');
-                            }
-                            if (state is WikiLoadSuccess) {
-                              return Text(state.wikiInfo);
-                            } else {
-                              return const Text('');
-                            }
-                          })
-                        // Builder(
-                        //   builder: (context) => FutureBuilder<String?>(
-                        //       future:
-                        //           fetchWikipediaData(filteredResults[index]),
-                        //       builder: (context, snapshot) {
-                        //         if (snapshot.connectionState ==
-                        //             ConnectionState.waiting) {
-                        //           return CircularProgressIndicator();
-                        //         } else if (snapshot.hasError) {
-                        //           return Text('Error loading data');
-                        //         } else if (snapshot.hasData) {
-                        //           return Padding(
-                        //             padding: const EdgeInsets.all(8.0),
-                        //             child: Text(
-                        //               snapshot.data!,
-                        //               style: TextStyle(fontSize: 14),
-                        //             ),
-                        //           );
-                        //         } else {
-                        //           return Container(); // Return an empty container if there's no data.
-                        //         }
-                        //       }),
-                        // ),
-                        /*
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: RichText(
-                              text: TextSpan(
-                                text: 'For more info visit ',
-                                style: DefaultTextStyle.of(context).style,
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: 'the Wikipedia page',
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        launch(filteredResults[index].taxon.wikipediaUrl.toString());
-                                      },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ), */
+                        BlocBuilder<WikiBloc, WikiState>(
+                            builder: (context, state) {
+                          if (state is WikiLoading) {
+                            return const CircularProgressIndicator();
+                          }
+                          if (state is WikiLoadFailure) {
+                            return const Text('Data could not be retrieved.');
+                          }
+                          if (state is WikiLoadSuccess) {
+                            return Text(state.wikiInfo);
+                          } else {
+                            return const Text('');
+                          }
+                        })
                       ],
                     ),
                   );
